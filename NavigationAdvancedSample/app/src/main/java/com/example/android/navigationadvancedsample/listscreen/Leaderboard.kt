@@ -25,8 +25,13 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.navigationadvancedsample.R
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.appbar.MaterialToolbar
 
 /**
  * Shows a static leaderboard with multiple users.
@@ -37,6 +42,12 @@ class Leaderboard : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_leaderboard, container, false)
+
+        val collapsing = view.findViewById<CollapsingToolbarLayout>(R.id.collapsing)
+        val toolbar = view.findViewById<MaterialToolbar>(R.id.topAppBar)
+
+//        toolbar.setupWithNavController(findNavController())
+        NavigationUI.setupWithNavController(collapsing, toolbar, findNavController())
 
         val viewAdapter = MyAdapter(Array(10) { "Person ${it + 1}" })
 
